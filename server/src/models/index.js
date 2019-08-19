@@ -1,53 +1,26 @@
-import { continents, countries, languages } from 'countries-list'
+import Sequelize from 'sequelize'
+import 'dotenv/config'
 
-const getCountries = () => {
-  const countriesArr = Object.entries(countries)
-  const countriesList = []
-  for (const [code, countryObj] of countriesArr) {
-    const continent = {
-      code: countryObj.continent,
-      name: continents[countryObj.continent]
-    }
-    const languagesArr = []
-    countryObj.languages.forEach(languageCode => languagesArr.push(languages[languageCode].name))
-    const country = {
-      code: code,
-      name: countryObj.name,
-      native: countryObj.native,
-      phone: countryObj.phone,
-      continent: continent,
-      capital: countryObj.capital,
-      currency: countryObj.currency,
-      languages: languagesArr,
-      emoji: countryObj.emoji,
-      emojiU: countryObj.emojiU
-    }
-    countriesList.push(country)
+const sequelize = new Sequelize(
+  process.env.DATABASE,
+  process.env.DATABASE_USER,
+  process.env.DATABASE_PASSWORD,
+  {
+    dialect: 'postgres'
   }
-  return countriesList
+)
+
+const models = {
+  Continent: sequelize.import('./continent'),
+  Country: sequelize.import('./country')
 }
 
- const getContinents = () => {
-  const continentsArr = Object.entries(continents)
-  const continentsList = []
-  const countriesArray = getCountries()
-  for (const [code, continentName] of continentsArr) {
-    const countriesList = countriesArray.filter(country => country.continent.code === code)
-    const continent = {
-      code: code,
-      name: continentName,
-      countries: countriesList
-    }
-
-    continentsList.push(continent)
+Object.keys(models).forEach(key => {
+  if ('associate' in models[key]) {
+    models[key].associate(models)
   }
-  return continentsList
-}
+})
 
-const continentsList = getContinents()
-const countriesList = getCountries()
+export { sequelize }
 
-export default {
-  continents: continentsList,
-  countries: countriesList
-}
+export default models;

@@ -1,16 +1,22 @@
 export default {
   Query: {
-    continents: (parent, args, { models }) => {
-      return models.continents
+    continents: async (parent, args, { models }) => {
+      return await models.Continent.findAll()
     },
-    continent: (parent, { code }, { models }) => {
-      return models.continents.find(continent => continent.code === code)
+    continent: async (parent, { code }, { models }) => {
+      return await models.Continent.findOne({
+        where: { code: code }
+      })
     },
   },
 
   Continent: {
-    countries: (continent, args, { models }) => {
-      return models.countries.filter(country => country.continent.code === continent.code)
+    countries: async (continent, args, { models }) => {
+      return await models.Country.findAll({
+        where: {
+          continentId: continent.id
+        }
+      })
     }
   } 
 }
