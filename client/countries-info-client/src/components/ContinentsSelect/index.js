@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import Select from 'react-select'
 
+import './index.css'
+
 const GET_CONTINENTS_LIST = gql`
   query {
     continents {
@@ -26,6 +28,7 @@ const ContinentsSelect = ({
 
       return (
         <Select
+          className="continentsSelect" 
           value={selectedContinent}
           onChange={onContinentSelected}
           options={continents}

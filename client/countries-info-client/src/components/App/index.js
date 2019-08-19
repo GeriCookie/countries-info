@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import ContinentsSelect from '../ContinentsSelect'
 import CountriesSelect from '../CountriesSelect'
 
+import './index.css'
+
 class App extends Component {
   state = {
     selectedContinent: null,
@@ -21,15 +23,17 @@ class App extends Component {
     const { selectedContinent, selectedCountry } = this.state
     return (
       <Fragment>
-        <ContinentsSelect 
-          selectedContinent={selectedContinent}
-          onContinentSelected={this.onContinentSelected}
-        />
-        <CountriesSelect
-          selectedContinent={selectedContinent}
-          selectedCountry={selectedCountry}
-          onCountrySelected={this.onCountrySelected}
-        />
+        <div className="selectArea">
+          <ContinentsSelect
+            selectedContinent={selectedContinent}
+            onContinentSelected={this.onContinentSelected}
+          />
+          <CountriesSelect
+            selectedContinent={selectedContinent}
+            selectedCountry={selectedCountry}
+            onCountrySelected={this.onCountrySelected}
+          />
+        </div>
       </Fragment>
     )
   }
