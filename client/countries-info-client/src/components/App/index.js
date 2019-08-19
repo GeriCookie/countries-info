@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ContinentsSelect from '../ContinentsSelect'
 import CountriesSelect from '../CountriesSelect'
+import Country from '../Country'
 
 import './index.css'
 
@@ -34,6 +35,9 @@ class App extends Component {
             onCountrySelected={this.onCountrySelected}
           />
         </div>
+        <Country
+          selectedCountry={selectedCountry}
+        />
       </Fragment>
     )
   }
