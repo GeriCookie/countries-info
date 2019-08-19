@@ -12,14 +12,13 @@ const GET_CONTINENTS_LIST = gql`
   }
 `
 
-const Continents = ({
+const ContinentsSelect = ({
   selectedContinent,
   onContinentSelected
 }) => (
   <Query query={GET_CONTINENTS_LIST}>
     {({ data, loading }) => {
       const { continents } = data
-      console.log(continents)
       
       if (loading && !continents) {
         return <div>Loading...</div>
@@ -47,4 +46,4 @@ const Continents = ({
   </Query>
 )
 
-export default Continents
+export default ContinentsSelect
