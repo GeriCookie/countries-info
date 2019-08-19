@@ -12,7 +12,8 @@ const sequelize = new Sequelize(
 
 const models = {
   Continent: sequelize.import('./continent'),
-  Country: sequelize.import('./country')
+  Country: sequelize.import('./country'),
+  Stats: sequelize.import('./stats')
 }
 
 Object.keys(models).forEach(key => {

@@ -1,12 +1,28 @@
 export default {
   Query: {
     countries: async (parent, args, { models }) => {
-      return await models.Country.findAll()
+      const countries = await models.Country.findAll()
+      await models.Stats.create(
+        {
+          query: 'countries',
+          arguments: '',
+          resultsCount: Object.keys(countries).length
+        },
+      )
+      return countries
     },
     country: async (parent, { code }, { models }) => {
-      return await models.Country.findOne({
+      const country = await models.Country.findOne({
         where: { code: code }
       })
+      await models.Stats.create(
+        {
+          query: 'country',
+          arguments: code,
+          resultsCount: 1
+        }
+      )
+      return country
     }
   },
 
