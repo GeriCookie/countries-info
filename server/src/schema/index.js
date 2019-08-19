@@ -1,28 +1,20 @@
 import { gql } from 'apollo-server-express'
 
-export default gql`
+import continentSchema from './continent'
+import countrySchema from './country'
+
+const linkSchema = gql`
   type Query {
-    continents: [Continent]!
-    continent(code: String!): Continent,
-    countries: [Country]!,
-    country(code: String!): Country,
-  }
-  type Continent {
-    name: String!,
-    code: String!
-    countries: [Country]!,
+    _: Boolean
   }
 
-  type Country {
-    code: String!,
-    name: String!,
-    native: String!,
-    phone: String!,
-    continent: Continent!,
-    capital: String!,
-    currency: String!,
-    languages: [String]!,
-    emoji: String!,
-    emojiU: String!
+  type Mutation {
+    _: Boolean
+  }
+
+  type Subscription {
+    _: Boolean
   }
 `
+
+export default [linkSchema, continentSchema, countrySchema]
