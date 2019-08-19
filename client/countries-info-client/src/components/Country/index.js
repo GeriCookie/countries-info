@@ -2,6 +2,8 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
+import './index.css'
+
 const GET_COUNTRY = gql`
   query($code: String!) {
     country(code: $code) {
@@ -41,15 +43,15 @@ const Country = ({ selectedCountry }) => {
             }
 
             return (
-              <div>
-                <div>{country.name}</div>
-                <div>{country.native}</div>
-                <div>{country.phone}</div>
-                <div>{country.continent.name}</div>
-                <div>{country.capital}</div>
-                <div>{country.currency}</div>
-                <div>{country.emoji}</div>
-                <div>{country.languages.map(language => <div>{language}</div>)}</div>
+              <div className="countryCard">
+                <div className="row"><span>Name: </span><span className="countryInfo">{country.name}</span></div>
+                <div className="row"><span>Name native:</span><span className="countryInfo">{country.native}</span></div>
+                <div className="row"><span>Phone code:</span><span className="countryInfo">{country.phone}</span></div>
+                <div className="row"><span>Continent:</span><span className="countryInfo">{country.continent.name}</span></div>
+                <div className="row"><span>Capital:</span><span className="countryInfo">{country.capital}</span></div>
+                <div className="row"><span>Currency:</span><span className="countryInfo">{country.currency}</span></div>
+                <div className="row"><span>Flag:</span><span className="countryInfo">{country.emoji}</span></div>
+                <div className="row"><span>Languages:</span><div className="countryInfo">{country.languages.map(language => <div>{language}</div>)}</div></div>
               </div>
             )
           }}

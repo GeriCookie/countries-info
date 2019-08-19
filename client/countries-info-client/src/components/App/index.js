@@ -35,9 +35,11 @@ class App extends Component {
             onCountrySelected={this.onCountrySelected}
           />
         </div>
-        <Country
-          selectedCountry={selectedCountry}
-        />
+        <div className="countryContainer">
+          <Country
+            selectedCountry={selectedCountry}
+          />
+        </div>
       </Fragment>
     )
   }
